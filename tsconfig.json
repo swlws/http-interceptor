@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
+    "declaration": true,
+    "declarationDir": "./types",
+    "downlevelIteration": true,
+    "esModuleInterop": true,
+    "lib": ["esnext", "dom", "DOM.Iterable"],
+    "moduleResolution": "node",
+    "outDir": "dist",
+    "strict": true,
+    "target": "ES6",
+    "module": "ESNext",
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["src/*"]
+    }
+  },
+  "include": ["src/**/*.ts", "types/**/*.ts"]
+}

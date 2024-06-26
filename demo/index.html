@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script src="../dist/http-interceptor.min.js"></script>
+    <script>
+        const { createImageInterceptor } = HttpInterceptor
+
+        const ins = createImageInterceptor()
+        ins.addFilterAndAdapter((url, data) => {
+            console.log('call filter')
+            return true
+        }, (url, data) => {
+            console.log('call adapter')
+            return ['ssss', data]
+        })
+        ins.apply()
+
+        const img = new Image()
+        img.src = 'kkk'
+    </script>
+</body>
+
+</html>
