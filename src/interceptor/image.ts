@@ -3,7 +3,10 @@ import BaseInterceptor from './base';
 /**
  * 拦截器 - Image
  */
-export default class ImageInterceptor<T> extends BaseInterceptor<T> {
+export default class ImageInterceptor<
+  K extends string,
+  T
+> extends BaseInterceptor<K, T> {
   constructor() {
     super();
   }
@@ -13,7 +16,7 @@ export default class ImageInterceptor<T> extends BaseInterceptor<T> {
    * @param {*} src
    * @returns
    */
-  nativeSetHandler(src: string) {
+  nativeSetHandler(src: K) {
     return src;
   }
 
@@ -22,14 +25,14 @@ export default class ImageInterceptor<T> extends BaseInterceptor<T> {
    * @param {*} src
    * @returns
    */
-  newSetHandler(src: string) {
+  newSetHandler(src: K) {
     const index = src.indexOf('?');
-    let url, data;
+    let url: K, data;
     if (index === -1) {
       url = src;
       data = '' as T;
     } else {
-      url = src.slice(0, index);
+      url = src.slice(0, index) as K;
       data = src.slice(index + 1) as T;
     }
 

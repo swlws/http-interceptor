@@ -4,12 +4,12 @@ import { AdapterFunction, AdapterReturn } from '../utils/error';
 /**
  * 拦截器基类
  */
-export default class BaseInterceptor<T> {
+export default class BaseInterceptor<K, T> {
   // 使用原生处理
   useNative = false;
 
   // 过滤器与适配器，成对出现
-  filterAndAdapterStack: [Filter<T>, Adapter<T>][] = [];
+  filterAndAdapterStack: [Filter<K, T>, Adapter<K, T>][] = [];
 
   /**
    * 启用拦截器
@@ -32,7 +32,7 @@ export default class BaseInterceptor<T> {
    * @param adapter
    * @returns
    */
-  addFilterAndAdapter(filter: Filter<T>, adapter: Adapter<T>) {
+  addFilterAndAdapter(filter: Filter<K, T>, adapter: Adapter<K, T>) {
     if (typeof filter !== 'function') {
       console.error(new AdapterFunction('filter must be a function'));
       return;
@@ -53,7 +53,7 @@ export default class BaseInterceptor<T> {
    * @param data
    * @returns
    */
-  callFilterAndAdapter(url: string, data: T): [string, T] {
+  callFilterAndAdapter(url: K, data?: T): [K, T | undefined] {
     if (this.filterAndAdapterStack.length === 0) return [url, data];
 
     for (const [filter, adapter] of this.filterAndAdapterStack) {

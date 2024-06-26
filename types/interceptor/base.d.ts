@@ -2,9 +2,9 @@ import { Filter, Adapter } from '@/types';
 /**
  * 拦截器基类
  */
-export default class BaseInterceptor<T> {
+export default class BaseInterceptor<K, T> {
     useNative: boolean;
-    filterAndAdapterStack: [Filter<T>, Adapter<T>][];
+    filterAndAdapterStack: [Filter<K, T>, Adapter<K, T>][];
     /**
      * 启用拦截器
      */
@@ -20,7 +20,7 @@ export default class BaseInterceptor<T> {
      * @param adapter
      * @returns
      */
-    addFilterAndAdapter(filter: Filter<T>, adapter: Adapter<T>): void;
+    addFilterAndAdapter(filter: Filter<K, T>, adapter: Adapter<K, T>): void;
     /**
      * 调用每一组过滤器和适配器
      *
@@ -28,7 +28,7 @@ export default class BaseInterceptor<T> {
      * @param data
      * @returns
      */
-    callFilterAndAdapter(url: string, data: T): [string, T];
+    callFilterAndAdapter(url: K, data?: T): [K, T | undefined];
     /**
      * 应用拦截器
      */
