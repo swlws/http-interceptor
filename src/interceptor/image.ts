@@ -25,7 +25,7 @@ export default class ImageInterceptor<
    * @param {*} src
    * @returns
    */
-  newSetHandler(src: K) {
+  newSetHandler(src: K): K {
     const index = src.indexOf('?');
     let url: K, data;
     if (index === -1) {
@@ -37,7 +37,7 @@ export default class ImageInterceptor<
     }
 
     const [newUrl, newData] = this.callFilterAndAdapter(url, data);
-    if (newUrl && newData) return newUrl + '?' + newData;
+    if (newUrl && newData) return (newUrl + '?' + newData) as K;
     return newUrl;
   }
 
@@ -49,26 +49,20 @@ export default class ImageInterceptor<
     const NativeImage = window.Image;
 
     class CustomImage extends NativeImage {
-      constructor(width?: number, height?: number) {
-        super(width, height);
-        Object.defineProperty(this, 'src', {
-          get() {
-            return this._src;
-          },
-          set(src = '') {
-            // 使用原生方式
-            if (_this.useNative) {
-              src = _this.nativeSetHandler(src);
-            } else {
-              // 使用拦截器
-              src = _this.newSetHandler(src);
-            }
-            this._src = src;
-            this.setAttribute('src', src);
-          },
-          configurable: true,
-          enumerable: true,
-        });
+      private _src!: K;
+
+      set src(value: K) {
+        if (_this.useNative) {
+          this._src = value;
+          return;
+        }
+
+        this._src = _this.newSetHandler(value);
+        this.setAttribute('src', this._src);
+      }
+
+      get src() {
+        return this._src;
       }
     }
 

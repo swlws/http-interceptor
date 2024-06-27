@@ -15,7 +15,7 @@ export default class ImageInterceptor<K extends string, T> extends BaseIntercept
      * @param {*} src
      * @returns
      */
-    newSetHandler(src: K): string;
+    newSetHandler(src: K): K;
     /**
      * 应用拦截器
      */
