@@ -35,11 +35,11 @@
 
         var xhr = new XMLHttpRequest();
         xhr.open("POST", '/server/xhr', true);
+        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhr.onload = function () {
             console.log('xhr onload')
         };
-        xhr.send(formData);
-        // xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhr.send('ddd');
 
         fetch('/server/fetch', {
             method: 'post',

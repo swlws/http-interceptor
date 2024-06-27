@@ -60,7 +60,7 @@ export default class XhrInterceptor<
 
         // 设置请请求头
         Object.keys(this._headers).forEach((key) => {
-          this.setRequestHeader(key, this._headers[key]);
+          super.setRequestHeader(key, this._headers[key]);
         });
 
         return super.send(data);

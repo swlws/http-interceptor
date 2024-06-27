@@ -14,9 +14,16 @@
     "http",
     "interceptor",
     "sendBeacon",
-    "Image"
+    "Image",
+    "xhr",
+    "fetch"
   ],
   "author": "swlws",
+  "homepage": "https://github.com/swlws/http-interceptor",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/swlws/http-interceptor.git"
+  },
   "license": "ISC",
   "devDependencies": {
     "babel-loader": "^9.1.3",
