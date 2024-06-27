@@ -18,7 +18,7 @@
         }
         const adapter = (url, data) => {
             console.log(`call adapter, url: ${url} data: ${JSON.stringify(data)}`)
-            return ['ssss', data]
+            return [url + '_adapter', data]
         }
 
         const interceptorList = [createBeaconInteceptor(), createImageInterceptor(), createXhrInterceptor(), createFetchInterceptor()]
@@ -27,24 +27,26 @@
             ins.apply()
         }
 
+        const formData = new FormData()
+        formData.append('name', 'xxx')
+
         const img = new Image()
         img.src = '/server/img'
 
         var xhr = new XMLHttpRequest();
         xhr.open("POST", '/server/xhr', true);
-        xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
         xhr.onload = function () {
             console.log('xhr onload')
         };
-        xhr.send("foo=bar&lorem=ipsum");
-
+        xhr.send(formData);
+        // xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 
         fetch('/server/fetch', {
             method: 'post',
-            body: {
-                name: 'xxx'
-            }
+            body: formData
         })
+
+        window.navigator.sendBeacon('/server/beacon', formData)
     </script>
 </body>
 
