@@ -8,7 +8,7 @@
     "tsc": "del dist && tsc",
     "build:watch": "tsc -w",
     "prepublishOnly": "npm run build",
-    "umd": "webpack --mode production"
+    "build": "webpack --mode production"
   },
   "keywords": [
     "http",
