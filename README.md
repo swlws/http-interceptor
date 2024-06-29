@@ -1,5 +1,13 @@
 # 请求拦截
 
+```mermaid
+graph LR
+    A(请求) ---> B{Filter}
+    B --符合条件--> C(Adaptor)
+    C --使用新的URL、BDOY--> D(发送请求)
+    B --不符合条件--> D
+```
+
 ## Iterceptor 拦截器
 
 定义拦截器的类型，支持的类型：
