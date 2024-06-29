@@ -1,5 +1,7 @@
 # 请求拦截
 
+## 设计
+
 ```mermaid
 graph LR
     A(请求) ---> B{Filter}
@@ -7,6 +9,8 @@ graph LR
     C --使用新的URL、BDOY--> D(发送请求)
     B --不符合条件--> D
 ```
+
+`Filter` 与 `Adaptor` 成对出现，满足过滤过滤器的条件后，使用对用的适配器修改 `URL`、`BDOY`
 
 ## Iterceptor 拦截器
 
