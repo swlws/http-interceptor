@@ -4,7 +4,9 @@
 
 定义拦截器的类型，支持的类型：
 
-- sendBeacon
+- XMLHttpRequest
+- fetch
+- window.navigator.sendBeacon
 - new Image
 
 ## Filter 过滤器
