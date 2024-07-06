@@ -1,5 +1,11 @@
 # 请求拦截
 
+## install
+
+```bash
+npm i @swl/http-interceptor
+```
+
 ## 设计
 
 ```mermaid
@@ -32,41 +38,51 @@ graph LR
 ## 示例
 
 ```js
-const { createBeaconInteceptor, createImageInterceptor, createXhrInterceptor, createFetchInterceptor } = HttpInterceptor
+const {
+  createBeaconInteceptor,
+  createImageInterceptor,
+  createXhrInterceptor,
+  createFetchInterceptor,
+} = HttpInterceptor;
 
 const filter = (url, data) => {
-    console.log(`call filter, url: ${url} data: ${JSON.stringify(data)}`)
-    return true
-}
+  console.log(`call filter, url: ${url} data: ${JSON.stringify(data)}`);
+  return true;
+};
 const adapter = (url, data) => {
-    console.log(`call adapter, url: ${url} data: ${JSON.stringify(data)}`)
-    return [url + '_adapter', data]
-}
+  console.log(`call adapter, url: ${url} data: ${JSON.stringify(data)}`);
+  return [url + "_adapter", data];
+};
 
-const interceptorList = [createBeaconInteceptor(), createImageInterceptor(), createXhrInterceptor(), createFetchInterceptor()]
+const interceptorList = [
+  createBeaconInteceptor(),
+  createImageInterceptor(),
+  createXhrInterceptor(),
+  createFetchInterceptor(),
+];
 for (const ins of interceptorList) {
-    ins.addFilterAndAdapter(filter, adapter)
-    ins.apply()
+  ins.addFilterAndAdapter(filter, adapter);
+  ins.apply();
 }
 
-const formData = new FormData()
-formData.append('name', 'xxx')
+const formData = new FormData();
+formData.append("name", "xxx");
 
-const img = new Image()
-img.src = '/server/img'
+const img = new Image();
+img.src = "/server/img";
 
 var xhr = new XMLHttpRequest();
-xhr.open("POST", '/server/xhr', true);
+xhr.open("POST", "/server/xhr", true);
 xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 xhr.onload = function () {
-    console.log('xhr onload')
+  console.log("xhr onload");
 };
-xhr.send('ddd');
+xhr.send("ddd");
 
-fetch('/server/fetch', {
-    method: 'post',
-    body: formData
-})
+fetch("/server/fetch", {
+  method: "post",
+  body: formData,
+});
 
-window.navigator.sendBeacon('/server/beacon', formData)
+window.navigator.sendBeacon("/server/beacon", formData);
 ```

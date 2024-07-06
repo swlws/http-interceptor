@@ -1,5 +1,5 @@
 {
-  "name": "http-interceptor",
+  "name": "@swl/http-interceptor",
   "version": "1.0.0",
   "description": "",
   "main": "dist/index.js",
@@ -24,7 +24,11 @@
     "type": "git",
     "url": "git+https://github.com/swlws/http-interceptor.git"
   },
-  "license": "ISC",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "license": "MIT",
   "devDependencies": {
     "babel-loader": "^9.1.3",
     "del": "^7.1.0",
